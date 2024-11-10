@@ -1,0 +1,10 @@
+file=open("dancingcat1234.txt","w")
+file.write("I Love caaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaat")
+file.write("\n1234567890")
+file.close()
+
+file=open("dancingcat1234.txt","r")
+data=file.read()
+print(data)
+#file.read("\n1234567890")
+file.close()
