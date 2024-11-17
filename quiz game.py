@@ -2,6 +2,12 @@ import pgzrun
 WIDTH=800
 HEIGHT=700
 TITLE="quiz game"
+allquestions=[]
+question=[]
+total=11
+timer=50
+number=0
+
 ryme=Rect(0,0,800,100)
 rane=Rect(75,510,225,170)
 rene=Rect(350,510,225,170)
@@ -29,11 +35,38 @@ def draw():
    screen.draw.textbox("question",line,color="black")
    screen.draw.textbox("Time",square,color="white")
    screen.draw.textbox("skip",lane,color="black")
-def update():
+
+def move_marquee():
+   ryme.x=ryme.x+1
+   if ryme.x>WIDTH:
+      ryme.x=0
+
+def on_mouse_down(pos):
+   pass
+
+def correct_answer():
+   pass
+
+def game_over():
+   pass
+
+def skip_question():
+   pass
+
+def update_time_left():
    pass
 
 
+def read_question_file():
+  file=open("questions.txt","r")
+  allquestions=file.readlines()
+  total=len(allquestions)
+  print(allquestions[number])
+  file.close()
 
-
+def update():
+   move_marquee()
+   
+read_question_file()
 
 pgzrun.go()
