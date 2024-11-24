@@ -2,10 +2,11 @@ import pgzrun
 WIDTH=800
 HEIGHT=700
 TITLE="quiz game"
+game_over=False
 allquestions=[]
 question=[]
 total=11
-timer=50
+time=20
 number=0
 
 ryme=Rect(0,0,800,100)
@@ -28,21 +29,28 @@ def draw():
    screen.draw.filled_rect(lane,"green")
 
    screen.draw.textbox("welcome to quiz",ryme,color="white")
-   screen.draw.textbox("1",rine,color="black")
-   screen.draw.textbox("2",rume,color="black")
-   screen.draw.textbox("3",rane,color="black")
-   screen.draw.textbox("4",rene,color="black")
-   screen.draw.textbox("question",line,color="black")
-   screen.draw.textbox("Time",square,color="white")
+   screen.draw.textbox(question[1],rine,color="black")
+   screen.draw.textbox(question[2],rume,color="black")
+   screen.draw.textbox(question[3],rane,color="black")
+   screen.draw.textbox(question[4],rene,color="black")
+   screen.draw.textbox(question[0],line,color="black")
+   screen.draw.textbox(str(time),square,color="white")
    screen.draw.textbox("skip",lane,color="black")
 
+def timer():
+   global time,game_over
+   if time>0:
+      time=time-1
+   else:
+      game_over=True
+clock.schedule_interval(timer,1)
 def move_marquee():
    ryme.x=ryme.x+1
    if ryme.x>WIDTH:
       ryme.x=0
 
 def on_mouse_down(pos):
-   pass
+   
 
 def correct_answer():
    pass
@@ -58,15 +66,19 @@ def update_time_left():
 
 
 def read_question_file():
+  global allquestions,total
   file=open("questions.txt","r")
   allquestions=file.readlines()
   total=len(allquestions)
-  print(allquestions[number])
   file.close()
 
 def update():
    move_marquee()
-   
+def read_next_question():
+   global number,question
+   question=allquestions[number].split(",")
+   print(question)
 read_question_file()
+read_next_question()
 
 pgzrun.go()
