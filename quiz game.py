@@ -6,6 +6,7 @@ game_over=False
 allquestions=[]
 question=[]
 total=11
+score=0
 time=20
 number=0
 
@@ -17,6 +18,7 @@ rume=Rect(350,300,225,170)
 line=Rect(75,130,500,140)
 square=Rect(600,130,150,140)
 lane=Rect(600,300,150,380)
+options=[rine,rume,rane,rene]
 def draw():
   
    screen.draw.filled_rect(ryme,"black")
@@ -50,20 +52,39 @@ def move_marquee():
       ryme.x=0
 
 def on_mouse_down(pos):
-   
+   number=1
+   for option in options:
+      if option.collidepoint(pos):
+         if number==int(question[5]):
+            correct_answer()
+         else:
+            skip_question()
+      number=number+1
+   if lane.collidepoint(pos):
+      skip_question()
 
 def correct_answer():
-   pass
+   global score,number
+   score=score+1
+   number=number+1
+   if number==11:
+      game_over()
+   else:
+      read_next_question()
 
 def game_over():
-   pass
+   global question,time
+   question=["GAME OVER.This was your score"+str(score),"-","-","-","-","5"]
+   time=0
+
 
 def skip_question():
-   pass
-
-def update_time_left():
-   pass
-
+   global score,number
+   number=number+1
+   if number==11:
+      game_over()
+   else:
+      read_next_question()
 
 def read_question_file():
   global allquestions,total
