@@ -45,6 +45,7 @@ def timer():
       time=time-1
    else:
       game_over=True
+      gameover()
 clock.schedule_interval(timer,1)
 def move_marquee():
    ryme.x=ryme.x+1
@@ -64,25 +65,27 @@ def on_mouse_down(pos):
       skip_question()
 
 def correct_answer():
-   global score,number
+   global score,number,time
+   time=20
    score=score+1
    number=number+1
    if number==11:
-      game_over()
+      gameover()
    else:
       read_next_question()
 
-def game_over():
+def gameover():
    global question,time
    question=["GAME OVER.This was your score"+str(score),"-","-","-","-","5"]
    time=0
 
 
 def skip_question():
-   global score,number
+   global score,number,time
+   time=20
    number=number+1
    if number==11:
-      game_over()
+      gameover()
    else:
       read_next_question()
 
